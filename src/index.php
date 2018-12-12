@@ -13,6 +13,7 @@
     <meta charset="UTF-8">
     <title>The Jump And Run Extrem</title>
     <link rel="stylesheet" href="styles/css/styles.css">
+    <script type="module" src="styles/js/main.js"></script>
 </head>
 <body>
     <?php 

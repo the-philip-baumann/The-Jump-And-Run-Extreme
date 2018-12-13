@@ -1,10 +1,10 @@
 export default class SpriteSheet{
+    //propertys of the sprite.
     constructor(image, width, height){
         this.image = image;
         this.width = width;
         this.height = height;
         this.tiles = new Map();
-
     }
     define(name, x, y){
         const buffer = document.createElement('canvas');

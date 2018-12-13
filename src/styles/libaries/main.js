@@ -3,6 +3,8 @@ import SpriteSheet from './spriteSheet.js';
 //imports the function loadImage from the folder js in the file loadImage.js
 import {loadImage} from './loadImage.js';
 
+alert("Sie wollen noch passende Musik zu spiel hören, denn genau dies habe ich Ihnen in diesem Spiel ermöglicht.")
+
 var context, controller, rectangle, loop;
 //creates the canvas and allows the user to talkt to the canvas.
 context = document.querySelector("canvas").getContext("2d");
@@ -71,20 +73,19 @@ loadImage('../styles/image/mariotileset.png')
         sprites.define('hindernis', 0, 10);
 
         //for-slope to fill the 'sky' with several blue pains.
-        for(let xachse = 0; xachse < 50; xachse++){
+        for(let xachse = 0; xachse < 100; xachse++){
             for(let yachse = 0; yachse < 19; yachse++){
                 sprites.draw('sky', context, xachse * 50, yachse * 50);    
             }
         }
         //for-slope to make ground
-        for(let xachse = 0; xachse < 50; xachse++){
+        for(let xachse = 0; xachse < 100; xachse++){
             for(let yachse = 16; yachse < 17; yachse++){
                 sprites.draw('ground', context, xachse * 50, yachse * 50);    
             }
         }
 
 });
-
 
     //When player pressed the spacebar it checks if button was pressed and if the character isnt already jumping.
   if (controller.up && rectangle.jumping == false) {
@@ -139,20 +140,38 @@ loadImage('../styles/image/mariotileset.png')
     windows.alert("Congratulations");
 
   }
-  
+  //Allows you to stand on an obstacle that you create further down.
   if(rectangle.x > 300 - 16 - 32 && rectangle.x < 500 && rectangle.y > 600 - 16 -32 && rectangle.y <620 - 16 -32){
     rectangle.y = 550;
     rectangle.jumping = false;
-  }else if(rectangle.x > 300 - 16 -32 && rectangle.x < 500 && rectangle.y > 600){
-    windows.alert("Hallo!");
+  }else if(rectangle.x > 300 - 16 -32 && rectangle.x < 500 -16 - 32 && rectangle.y > 600){
+    rectangle.x = 200;
+    rectangle.y = 200;
+  }
+
+  if(rectangle.x > 600  - 16 - 32 && rectangle.x < 800 && rectangle.y > 600  - 32 - 16 && rectangle.y < 620 - 16 -32){
+    rectangle.y = 550;
+    rectangle.jumping =false;
+  }else if(rectangle.x > 600 - 16 - 32 && rectangle.x < 800 - 16 - 32 && rectangle.y > 600){
+    rectangle.x = 200;
+    rectangle.y = 200;
+  }
+
+  if(rectangle.x > 800 - 16 - 32 && rectangle.x < 1400 - 16 - 32 && rectangle.y > 400 - 32 - 16 && rectangle.y < 420 - 16 -32){
+    rectangle.y = 350;
+    rectangle.jumping = false;
+  }else if(rectangle.x > 800 - 16 -32 && rectangle.x < 1400 - 16 - 32 && rectangle.y > 400){
+    rectangle.y = 200;
+    rectangle.x = 300;
   }
 
   context.beginPath();
   context.rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+  //Drawing the obstacles you can stand on.
   context.rect(300, 600, 200, 20);
   context.rect(600, 600, 200, 20);
-  context.rect(450, 400, 200, 20);
-  context.rect(300, 200, 200, 20);
+  context.rect(800, 400, 600, 20);
+ 
 
   context.fill();
   context.strokeStyle = "#202830";

@@ -3,7 +3,8 @@ import SpriteSheet from './spriteSheet.js';
 //imports the function loadImage from the folder js in the file loadImage.js
 import {loadImage} from './loadImage.js';
 
-alert("Sie wollen noch passende Musik zu spiel hören, denn genau dies habe ich Ihnen in diesem Spiel ermöglicht.")
+
+
 
 var context, controller, rectangle, loop;
 //creates the canvas and allows the user to talkt to the canvas.
@@ -24,6 +25,9 @@ rectangle = {
   y_velocity:0
 
 };
+
+
+
 
 ///////////////////////////////////////////////////////////////
 //////////////////////////Movement/////////////////////////////
@@ -87,12 +91,12 @@ loadImage('../styles/image/mariotileset.png')
 
 });
 
+
     //When player pressed the spacebar it checks if button was pressed and if the character isnt already jumping.
   if (controller.up && rectangle.jumping == false) {
     //Its minus -50 since y_velocity begins at the border on the top. 
     rectangle.y_velocity -= 50;
     rectangle.jumping = true;
-
   }
 
   if (controller.left) {
@@ -135,38 +139,39 @@ loadImage('../styles/image/mariotileset.png')
 
 
 
-  } else if (rectangle.x > 10000) {// Marks the finishline of the game. If reached it will give you an Congratulations alert.
-
-    windows.alert("Congratulations");
+  } else if (rectangle.x > 500 ) {// Marks the finishline of the game. If reached it will give you an Congratulations alert.
 
   }
-  //Allows you to stand on an obstacle that you create further down.
-  if(rectangle.x > 300 - 16 - 32 && rectangle.x < 500 && rectangle.y > 600 - 16 -32 && rectangle.y <620 - 16 -32){
-    rectangle.y = 550;
-    rectangle.jumping = false;
-  }else if(rectangle.x > 300 - 16 -32 && rectangle.x < 500 -16 - 32 && rectangle.y > 600){
-    rectangle.x = 200;
-    rectangle.y = 200;
-  }
 
-  if(rectangle.x > 600  - 16 - 32 && rectangle.x < 800 && rectangle.y > 600  - 32 - 16 && rectangle.y < 620 - 16 -32){
-    rectangle.y = 550;
-    rectangle.jumping =false;
-  }else if(rectangle.x > 600 - 16 - 32 && rectangle.x < 800 - 16 - 32 && rectangle.y > 600){
-    rectangle.x = 200;
-    rectangle.y = 200;
-  }
-
-  if(rectangle.x > 800 - 16 - 32 && rectangle.x < 1400 - 16 - 32 && rectangle.y > 400 - 32 - 16 && rectangle.y < 420 - 16 -32){
-    rectangle.y = 350;
-    rectangle.jumping = false;
-  }else if(rectangle.x > 800 - 16 -32 && rectangle.x < 1400 - 16 - 32 && rectangle.y > 400){
-    rectangle.y = 200;
-    rectangle.x = 300;
-  }
+    //Allows you to stand on an obstacle that you create further down.(1. obstacle)
+    if(rectangle.x > 300 - 16 - 32 && rectangle.x < 500 && rectangle.y > 600 - 16 -32 && rectangle.y <620 - 16 -32){
+      rectangle.y = 550;
+      rectangle.jumping = false;
+    }else if(rectangle.x > 300 - 16 -32 && rectangle.x < 500 -16 - 32 && rectangle.y > 600){
+      rectangle.x = 200;
+      rectangle.y = 200;
+    }
+    //(2. obstacle)
+    if(rectangle.x > 600  - 16 - 32 && rectangle.x < 800 && rectangle.y > 600  - 32 - 16 && rectangle.y < 620 - 16 -32){
+      rectangle.y = 550;
+      rectangle.jumping =false;
+    }else if(rectangle.x > 600 - 16 - 32 && rectangle.x < 800 - 16 - 32 && rectangle.y > 600){
+      rectangle.x = 200;
+      rectangle.y = 200;
+    }
+    //(3. obstacle)
+    if(rectangle.x > 800 - 16 - 32 && rectangle.x < 1400 - 16 - 32 && rectangle.y > 400 - 32 - 16 && rectangle.y < 420 - 16 -32){
+      rectangle.y = 350;
+      rectangle.jumping = false;
+    }else if(rectangle.x > 800 - 16 -32 && rectangle.x < 1400 - 16 - 32 && rectangle.y > 400){
+      rectangle.y = 200;
+      rectangle.x = 300;
+      
+    }
 
   context.beginPath();
   context.rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+  context.fillstyle = "red";
   //Drawing the obstacles you can stand on.
   context.rect(300, 600, 200, 20);
   context.rect(600, 600, 200, 20);
@@ -174,7 +179,7 @@ loadImage('../styles/image/mariotileset.png')
  
 
   context.fill();
-  context.strokeStyle = "#202830";
+  context.fillstyle = "#202830";
   context.lineWidth = 4;
   context.beginPath();
   context.moveTo(1500, 800);
@@ -188,6 +193,7 @@ loadImage('../styles/image/mariotileset.png')
   window.requestAnimationFrame(loop);
 
 };
+
 
 window.addEventListener("keydown", controller.keyListener)
 window.addEventListener("keyup", controller.keyListener);

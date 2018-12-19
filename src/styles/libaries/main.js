@@ -5,7 +5,7 @@ import {loadImage} from './loadImage.js';
 
 
 
-
+var timerRunning = 1;
 var context, controller, rectangle, loop;
 //creates the canvas and allows the user to talkt to the canvas.
 context = document.querySelector("canvas").getContext("2d");
@@ -16,9 +16,9 @@ context.canvas.width = 1600;
 
 rectangle = {
 
-  height:50, //height of the character.
+  height:30, //height of the character.
   jumping:true,
-  width:50, //width of the character.
+  width:30, //width of the character.
   x:0, //The distance from the right border which the character gets summond.
   x_velocity:20,
   y:400, //The distance from the top border which the character gets summond.
@@ -63,136 +63,132 @@ controller = {
 
 };
 
+loop = function(timestamp) {
 
+  //Adds the Background and the ground to the canvas.
+  loadImage('../styles/image/mariotileset.png')
+  .then(image => {
+      const sprites = new SpriteSheet (image, 30, 30);
+      //Defines were to find the image on the mariotileset.png image 
+          sprites.define('ground', 0 , 0);
+          sprites.define('sky', 27, 5 );
+          sprites.define('dirt',34 , 15)
 
-loop = function() {
+          //for-slope to fill the sky with several blue pains.
+          for(let xachse = 0; xachse < 100; xachse++){
+              for(let yachse = 0; yachse < 25; yachse++){
+                  sprites.draw('sky', context, xachse * 30, yachse * 30);    
+              }
+          }
+          //for-slope to make the ground
+          for(let xachse = 0; xachse < 100; xachse++){
+              for(let yachse = 25; yachse < 26; yachse++){
+                  sprites.draw('ground', context, xachse * 30, yachse * 30);    
+              }
+          }
 
-//Adds the Background and the ground to the canvas.
-loadImage('../styles/image/mariotileset.png')
-.then(image => {
-    const sprites = new SpriteSheet (image, 50, 50);
-    //Defines were to find the image on the mariotileset.png image 
-        sprites.define('ground', 0 , 0);
-        sprites.define('sky', 16, 2 );
-        sprites.define('hindernis', 0, 10);
-
-        //for-slope to fill the 'sky' with several blue pains.
-        for(let xachse = 0; xachse < 100; xachse++){
-            for(let yachse = 0; yachse < 19; yachse++){
-                sprites.draw('sky', context, xachse * 50, yachse * 50);    
+          //for-slope to make dirt
+          for(let xachse = 0; xachse < 100; xachse++){
+            for(let yachse = 26; yachse < 29; yachse++){
+              sprites.draw('dirt', context, xachse * 30, yachse * 30);
             }
-        }
-        //for-slope to make ground
-        for(let xachse = 0; xachse < 100; xachse++){
-            for(let yachse = 16; yachse < 17; yachse++){
-                sprites.draw('ground', context, xachse * 50, yachse * 50);    
-            }
-        }
+          }
 
-});
+  });
 
 
-    //When player pressed the spacebar it checks if button was pressed and if the character isnt already jumping.
-  if (controller.up && rectangle.jumping == false) {
-    //Its minus -50 since y_velocity begins at the border on the top. 
-    rectangle.y_velocity -= 50;
-    rectangle.jumping = true;
-  }
-
-  if (controller.left) {
-    //Speed gets decreased by 0.5 when button: left arrow; is pressed.
-    rectangle.x_velocity -= 0.5;
-
-  }
-
-  if (controller.right) {
-    //The speed gets increased by 0.5 when button: right arrow; is pressed.
-    rectangle.x_velocity += 0.5;
-
-  }
-
-  if(controller.right && controller.space){
-      //If buttons: right arrow, spacebar; is pressed it increased the speed by another 1 (Turbo).
-      rectangle.x_velocity += 1;
-  }
-
-
- 
-
-  rectangle.y_velocity += 1; //This speed of which defines how fast the creature gets back to the floor.
-  rectangle.x += rectangle.x_velocity;
-  rectangle.y += rectangle.y_velocity;
-  rectangle.x_velocity *= 0.9;// Basically acts like the friction.
-  rectangle.y_velocity *= 0.9;// Basically acts like the friction.
-
-  // If the character is falling below the floor this prevents it from falling further down.
-  if (rectangle.y > 800 - 16 - 32) {
-
-    rectangle.jumping = false;
-    rectangle.y = 800 - 16 - 32;
-    rectangle.y_velocity = 0;
-
-  }
-
-  // If character disappears on the left side of the screen it will give you a Game over alert.
-  if (rectangle.x < -32) {
-
-
-
-  } else if (rectangle.x > 500 ) {// Marks the finishline of the game. If reached it will give you an Congratulations alert.
-
-  }
-
-    //Allows you to stand on an obstacle that you create further down.(1. obstacle)
-    if(rectangle.x > 300 - 16 - 32 && rectangle.x < 500 && rectangle.y > 600 - 16 -32 && rectangle.y <620 - 16 -32){
-      rectangle.y = 550;
-      rectangle.jumping = false;
-    }else if(rectangle.x > 300 - 16 -32 && rectangle.x < 500 -16 - 32 && rectangle.y > 600){
-      rectangle.x = 200;
-      rectangle.y = 200;
+      //When player pressed the spacebar it checks if button was pressed and if the character isnt already jumping.
+    if (controller.up && rectangle.jumping == false) {
+      //Its minus -50 since y_velocity begins at the border on the top. 
+      rectangle.y_velocity -= 35;
+      rectangle.jumping = true;
     }
-    //(2. obstacle)
-    if(rectangle.x > 600  - 16 - 32 && rectangle.x < 800 && rectangle.y > 600  - 32 - 16 && rectangle.y < 620 - 16 -32){
-      rectangle.y = 550;
-      rectangle.jumping =false;
-    }else if(rectangle.x > 600 - 16 - 32 && rectangle.x < 800 - 16 - 32 && rectangle.y > 600){
-      rectangle.x = 200;
-      rectangle.y = 200;
+
+    if (controller.left) {
+      //Speed gets decreased by 0.5 when button: left arrow; is pressed.
+      rectangle.x_velocity -= 0.2;
+
     }
-    //(3. obstacle)
-    if(rectangle.x > 800 - 16 - 32 && rectangle.x < 1400 - 16 - 32 && rectangle.y > 400 - 32 - 16 && rectangle.y < 420 - 16 -32){
-      rectangle.y = 350;
+
+    if (controller.right) {
+      //The speed gets increased by 0.5 when button: right arrow; is pressed.
+      rectangle.x_velocity += 0.2;
+
+    }
+
+    if(controller.right && controller.space){
+        //If buttons: right arrow, spacebar; is pressed it increased the speed by another 1 (Turbo).
+        rectangle.x_velocity += 0.2;
+    }
+
+
+  
+
+    rectangle.y_velocity += 1; //This speed of which defines how fast the creature gets back to the floor.
+    rectangle.x += rectangle.x_velocity;
+    rectangle.y += rectangle.y_velocity;
+    rectangle.x_velocity *= 0.9;// Basically acts like the friction.
+    rectangle.y_velocity *= 0.9;// Basically acts like the friction.
+
+    // If the character is falling below the floor this prevents it from falling further down.
+    if (rectangle.y > 720) {
+
       rectangle.jumping = false;
-    }else if(rectangle.x > 800 - 16 -32 && rectangle.x < 1400 - 16 - 32 && rectangle.y > 400){
-      rectangle.y = 200;
-      rectangle.x = 300;
+      rectangle.y = 720;
+      rectangle.y_velocity = 0;
+
+    }
+
+
+      //Allows you to stand on an obstacle that you create further down.(1. obstacle)
+      if(rectangle.x > 300 - 30 && rectangle.x < 450 && rectangle.y > 650 - 30 && rectangle.y < 660 - 30){
+        rectangle.y = 620;
+        rectangle.jumping = false;
+
+      }
+      
+        //(2. obstacle)
+    if(rectangle.x > 600 - 30 && rectangle.x < 700 && rectangle.y > 650  - 30 && rectangle.y < 660 - 30){
+      rectangle.y = 620;
+      rectangle.jumping = false;
       
     }
 
-  context.beginPath();
-  context.rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
-  context.fillstyle = "red";
-  //Drawing the obstacles you can stand on.
-  context.rect(300, 600, 200, 20);
-  context.rect(600, 600, 200, 20);
-  context.rect(800, 400, 600, 20);
- 
-
-  context.fill();
-  context.fillstyle = "#202830";
-  context.lineWidth = 4;
-  context.beginPath();
-  context.moveTo(1500, 800);
-  context.lineTo(0, 800);
-  context.stroke();  
-;
- 
+    context.beginPath();
+    context.rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+    context.fillstyle = "red";
+    //Drawing the obstacles you can stand on.
+    context.rect(300, 650, 150, 5);
+    context.rect(600, 650, 100, 5);
+    context.rect(800, 400, 600, 20);
   
 
-  // call update when the browser is ready to draw again
-  window.requestAnimationFrame(loop);
+    context.fill();
+    context.fillstyle = "#202830";
+    context.lineWidth = 4;
+    context.beginPath();
 
+    context.stroke();  
+  
+  
+    
+    
+    // call update when the browser is ready to draw again
+    window.requestAnimationFrame(loop);
+    
 };
+
+var timestamp = 0;
+var time = 0;
+
+function timer(){
+  time = time + 0.5;
+  console.log(time);
+  return time;
+}
+if(timerRunning == true){
+timestamp = setInterval(timer, 500);
+}
 
 
 window.addEventListener("keydown", controller.keyListener)

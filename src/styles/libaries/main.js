@@ -104,13 +104,13 @@ loop = function(timestamp) {
 
     if (controller.left) {
       //Speed gets decreased by 0.5 when button: left arrow; is pressed.
-      rectangle.x_velocity -= 0.2;
+      rectangle.x_velocity -= 0.35;
 
     }
 
     if (controller.right) {
       //The speed gets increased by 0.5 when button: right arrow; is pressed.
-      rectangle.x_velocity += 0.2;
+      rectangle.x_velocity += 0.35;
 
     }
 
@@ -139,61 +139,155 @@ loop = function(timestamp) {
 
 
       //Allows you to stand on an obstacle that you create further down.(1. obstacle)
-      if(rectangle.x > 300 - 30 && rectangle.x < 450 && rectangle.y > 650 - 30 && rectangle.y < 660 - 30){
+      /*if(rectangle.x > 300 - 30 && rectangle.x < 450 && rectangle.y > 650 - 30 && rectangle.y < 660 - 30){
+        rectangle.y = 620;
+        rectangle.jumping = false;*/
+
+      //(2. obstacle)
+      if(rectangle.x > 100 - 30 && rectangle.x < 100 + 150 && rectangle.y > 190  - 30 && rectangle.y < 190 + 10 - 30){
         rectangle.y = 620;
         rectangle.jumping = false;
-
+        document.getElementById("hiddenScore").value = timestamp;
+        rectangle.x = 100;
+        rectangle.y = 100; 
+        redirector();
       }
       
-        //(2. obstacle)
-    if(rectangle.x > 600 - 30 && rectangle.x < 700 && rectangle.y > 650  - 30 && rectangle.y < 660 - 30){
-      rectangle.y = 620;
-      rectangle.jumping = false;
-      document.getElementById("hiddenScore").value = timestamp;
-      rectangle.x = 100;
-      rectangle.y = 100; 
-      redirector();
-    }
+
 
     context.beginPath();
     context.rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
     context.fillstyle = "red";
    
    
-  //Creating the obstacles you can stant on.
-  var obst1 = {
+  //Creating the obstacles you can stan on.
+  var obstacle_1 = {
     x:300,    
     y:650,
     width:150, 
-    height:5, 
+    height:7,
+    collision:612, 
   };
 
-  var obst2 = {
+  var obstacle_2 = {
+    x:530,    
+    y:600,
+    width:100, 
+    height:7,
+    collision: 562, 
+  };
+
+  var obstacle_3 = {
+    x:700,    
+    y:540,
+    width:100, 
+    height:7,
+    collision:502, 
+  };
+
+  var obstacle_4 = {
+    x:910,    
+    y:600,
+    width:150, 
+    height:10,
+    collision: 562, 
+  };
+
+  var obstacle_5 = {
+    x:1150,    
+    y:550,
+    width:100, 
+    height:5,
+    collision: 512,
+  };
+
+  var obstacle_6 = {
+    x:1350,    
+    y:475,
+    width:220, 
+    height:8,
+    collision: 437, 
+  };
+
+  var obstacle_7 = {
+    x:1350,    
+    y:380,
+    width:220, 
+    height:8,
+    collision: 342,
+  };
+
+  var obstacle_8 = {
+    x:1100,    
+    y:330,
+    width:150, 
+    height:5,
+    collision:292,
+  };
+
+  var obstacle_9 = {
+    x:850,    
+    y:300,
+    width:150, 
+    height:5, 
+    collision: 261,
+  };
+
+  var obstacle_10 = {
     x:600,    
-    y:650,
-    width:100, 
+    y:270,
+    width:150, 
     height:5, 
+    collision: 231,
   };
 
-  var obst3 = {
-    x:200,    
-    y:250,
-    width:100, 
-    height:50, 
-  };
+  var obstacle_11 = {
+    x:350,    
+    y:240,
+    width:150, 
+    height:5,
+    collision: 203,
+  }; 
 
-  var obstacles = [obst1, obst2, obst3];
+  var obstacle_12 = {
+    x:100,    
+    y:190,
+    width:150, 
+    height:5,
+    collision: 147, 
+  }; 
+
+
+
+
+  var obstacles = [obstacle_1, obstacle_2, obstacle_3, obstacle_4, obstacle_5, obstacle_6, obstacle_7, obstacle_8, obstacle_9, obstacle_10, obstacle_11, obstacle_12];
 
   //Drawing the obstacles you can stand on.  
   obstacles.forEach(function (obst) {
     context.rect(obst.x, obst.y, obst.width, obst.height);
+
+  //Allows you to stand on an obstacle that you create further down.(1. obstacle)
+  if(rectangle.x > obst.x - 30 && rectangle.x < obst.x + obst.width && rectangle.y > obst.y - 30 && rectangle.y < obst.y + 10 - 30){
+    rectangle.y = obst.collision;
+    rectangle.jumping = false;
+
+  }
+
+  if(rectangle.x > 300 -30 + 75 && rectangle.y > 670){
+    rectangle.jumping = true;
+  }
+
+
+
  });
+
+
    
    
     //Drawing the obstacles you can stand on.
-  //  context.rect(300, 650, 150, 5);
-  //  context.rect(600, 650, 100, 5);
-    context.rect(800, 400, 600, 20);
+    //context.rect(300, 650, 150, 5);
+    //context.rect(600, 650, 100, 5);
+    //context.rect(800, 400, 600, 20);
   
 
     context.fill();

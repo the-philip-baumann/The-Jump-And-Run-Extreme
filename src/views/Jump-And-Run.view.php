@@ -12,6 +12,6 @@
 </div>
 
 <form method="GET" action="scoreboard.view.php">
-    <input id="hiddenScore" name="hiddenScore" type="textbox" type="hidden">
+    <input id="hiddenScore" name="hiddenScore" type="textbox" hidden>
 </form>
 

@@ -27,8 +27,6 @@ rectangle = {
 };
 
 
-
-
 ///////////////////////////////////////////////////////////////
 //////////////////////////Movement/////////////////////////////
 ///////////////////////////////////////////////////////////////
@@ -151,15 +149,50 @@ loop = function(timestamp) {
     if(rectangle.x > 600 - 30 && rectangle.x < 700 && rectangle.y > 650  - 30 && rectangle.y < 660 - 30){
       rectangle.y = 620;
       rectangle.jumping = false;
-      
+      document.getElementById("hiddenScore").value = timestamp;
+      rectangle.x = 100;
+      rectangle.y = 100; 
+      redirector();
     }
 
     context.beginPath();
     context.rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
     context.fillstyle = "red";
+   
+   
+  //Creating the obstacles you can stant on.
+  var obst1 = {
+    x:300,    
+    y:650,
+    width:150, 
+    height:5, 
+  };
+
+  var obst2 = {
+    x:600,    
+    y:650,
+    width:100, 
+    height:5, 
+  };
+
+  var obst3 = {
+    x:200,    
+    y:250,
+    width:100, 
+    height:50, 
+  };
+
+  var obstacles = [obst1, obst2, obst3];
+
+  //Drawing the obstacles you can stand on.  
+  obstacles.forEach(function (obst) {
+    context.rect(obst.x, obst.y, obst.width, obst.height);
+ });
+   
+   
     //Drawing the obstacles you can stand on.
-    context.rect(300, 650, 150, 5);
-    context.rect(600, 650, 100, 5);
+  //  context.rect(300, 650, 150, 5);
+  //  context.rect(600, 650, 100, 5);
     context.rect(800, 400, 600, 20);
   
 
@@ -188,6 +221,11 @@ function timer(){
 }
 if(timerRunning == true){
 timestamp = setInterval(timer, 500);
+}
+
+function redirector(){
+  location.reload();
+  window.location = "scoreboard.view.php?score=" + document.getElementById("hiddenScore").value;
 }
 
 

@@ -5,8 +5,10 @@ import {loadImage} from './loadImage.js';
 
 
 
-var timerRunning = 1;
-var context, controller, rectangle, loop;
+
+
+
+var context, controller, player, loop;
 //creates the canvas and allows the user to talkt to the canvas.
 context = document.querySelector("canvas").getContext("2d");
 //Gives the canvas the property of 840 pixel of height
@@ -14,7 +16,7 @@ context.canvas.height = 840;
 //Gives the canvas the property of 1600 pixel of width. 
 context.canvas.width = 1600;
 
-rectangle = {
+player = {
 
   height:30, //height of the character.
   jumping:true,
@@ -96,44 +98,44 @@ loop = function(timestamp) {
 
 
       //When player pressed the spacebar it checks if button was pressed and if the character isnt already jumping.
-    if (controller.up && rectangle.jumping == false) {
+    if (controller.up && player.jumping == false) {
       //Its minus -50 since y_velocity begins at the border on the top. 
-      rectangle.y_velocity -= 35;
-      rectangle.jumping = true;
+      player.y_velocity -= 35;
+      player.jumping = true;
     }
 
     if (controller.left) {
       //Speed gets decreased by 0.5 when button: left arrow; is pressed.
-      rectangle.x_velocity -= 0.35;
+      player.x_velocity -= 0.33;
 
     }
 
     if (controller.right) {
       //The speed gets increased by 0.5 when button: right arrow; is pressed.
-      rectangle.x_velocity += 0.35;
+      player.x_velocity += 0.33;
 
     }
 
     if(controller.right && controller.space){
         //If buttons: right arrow, spacebar; is pressed it increased the speed by another 1 (Turbo).
-        rectangle.x_velocity += 0.2;
+        player.x_velocity += .18;
     }
 
 
   
 
-    rectangle.y_velocity += 1; //This speed of which defines how fast the creature gets back to the floor.
-    rectangle.x += rectangle.x_velocity;
-    rectangle.y += rectangle.y_velocity;
-    rectangle.x_velocity *= 0.9;// Basically acts like the friction.
-    rectangle.y_velocity *= 0.9;// Basically acts like the friction.
+    player.y_velocity += 1; //This speed of which defines how fast the creature gets back to the floor.
+    player.x += player.x_velocity;
+    player.y += player.y_velocity;
+    player.x_velocity *= 0.9;// Basically acts like the friction.
+    player.y_velocity *= 0.9;// Basically acts like the friction.
 
     // If the character is falling below the floor this prevents it from falling further down.
-    if (rectangle.y > 720) {
+    if (player.y > 720) {
 
-      rectangle.jumping = false;
-      rectangle.y = 720;
-      rectangle.y_velocity = 0;
+      player.jumping = false;
+      player.y = 720;
+      player.y_velocity = 0;
 
     }
 
@@ -144,19 +146,19 @@ loop = function(timestamp) {
         rectangle.jumping = false;*/
 
       //(2. obstacle)
-      if(rectangle.x > 100 - 30 && rectangle.x < 100 + 150 && rectangle.y > 190  - 30 && rectangle.y < 190 + 10 - 30){
-        rectangle.y = 620;
-        rectangle.jumping = false;
+      if(player.x > 100 - 30 && player.x < 100 + 150 && player.y > 190  - 30 && player.y < 190 + 10 - 30){
+        player.y = 620;
+        player.jumping = false;
         document.getElementById("hiddenScore").value = timestamp;
-        rectangle.x = 100;
-        rectangle.y = 100; 
+        player.x = 100;
+        player.y = 100; 
         redirector();
       }
       
 
 
     context.beginPath();
-    context.rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+    context.rect(player.x, player.y, player.width, player.height);
     context.fillstyle = "red";
    
    
@@ -267,14 +269,14 @@ loop = function(timestamp) {
     context.rect(obst.x, obst.y, obst.width, obst.height);
 
   //Allows you to stand on an obstacle that you create further down.(1. obstacle)
-  if(rectangle.x > obst.x - 30 && rectangle.x < obst.x + obst.width && rectangle.y > obst.y - 30 && rectangle.y < obst.y + 10 - 30){
-    rectangle.y = obst.collision;
-    rectangle.jumping = false;
+  if(player.x > obst.x - 30 && player.x < obst.x + obst.width && player.y > obst.y - 30 && player.y < obst.y + 10 - 30){
+    player.y = obst.collision;
+    player.jumping = false;
 
   }
 
-  if(rectangle.x > 300 -30 + 75 && rectangle.y > 670){
-    rectangle.jumping = true;
+  if(player.x > 300 -30 + 75 && player.y > 670){
+    player.jumping = true;
   }
 
 
@@ -305,12 +307,13 @@ loop = function(timestamp) {
     
 };
 
+var timerRunning = true;
 var timestamp = 0;
 var time = 0;
 
 function timer(){
   time = time + 0.5;
-  console.log(time);
+  //console.log(time);
   return time;
 }
 if(timerRunning == true){
@@ -318,8 +321,8 @@ timestamp = setInterval(timer, 500);
 }
 
 function redirector(){
-  location.reload();
-  window.location = "scoreboard.view.php?score=" + document.getElementById("hiddenScore").value;
+  location.reload(); //3745
+  window.location = "scoreboard.view.php?score=" + "1c1986y37973.8912780548923574.20569.868e881u" + document.getElementById("hiddenScore").value + "ru167r5.i81t6s792.14863147.181556841";
 }
 
 

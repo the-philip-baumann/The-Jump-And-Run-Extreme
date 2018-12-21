@@ -8,19 +8,31 @@
 <body>
     <div class="wrapper">
         <fieldset>
+            <table>
+                <tr>
+                    <th class="user_score_title">Username</th>
+                    <th class="user_score_title">Score</th>
+                </tr>
             <?php
-                foreach($allPostsTable as $row):    
-            ?>
+                foreach($allPostsTable as $row):
+
+                   
+           ?>
                     
-            <h5>
-            <?= htmlspecialchars($row['username'], ENT_QUOTES, "UTF-8"); ?>
-            <?= htmlspecialchars($row['score'], ENT_QUOTES, "UTF-8"); ?>
-            </h5>
+            <tr>
+                <td class="font-fat"><?= htmlspecialchars($row['username'], ENT_QUOTES, "UTF-8"); ?><b></th>
+                <td class="font-fat"><?= htmlspecialchars($row['score'], ENT_QUOTES, "UTF-8"); ?></th>
+            </tr>
+            
+           
             
             <?php
                 endforeach;
+                
             ?>
-
-        </fieldset>
+            </table>
+            <form action="jump-and-run.view.php">
+                <input class="btn btn-primary" type="submit" value="Zurück zum Spiel" name="eintragen" id="eintragen">
+            </form>
     </div>
 </body>

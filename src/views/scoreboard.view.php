@@ -7,7 +7,7 @@
 <body>
     <?php
         include "../models/Jump-And-Run.model.php";
-        echo "Score = $score" ;
+       
     ?>
     <div class="wrapper">
         <form method="POST">
@@ -17,7 +17,9 @@
                 </div>
 
                 <div class="add-score">
-                    <input class="form-control" type="text" id="score" name="score" value="<?php echo $score; ?>" disabled >
+                    <input class="form-control" type="text" id="score" name="score" value="<?php if($manipulated > 10000){
+
+                    echo $manipulated;}else{echo "";} ?> " disabled >
                 </div>
 
                 <div class="form-actions">

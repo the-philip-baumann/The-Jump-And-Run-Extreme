@@ -32,3 +32,35 @@ body{
     list-style: none;
     margin-left: 5px;
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+  
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.font-fat{
+    font-size: 20pt;
+    font-family: helvetica, sans-serif;
+}
+
+tr:nth-child(even)
+{
+    background-color: #f2f2f2;
+}
+
+fieldset, legend, td, th.user_score_title {
+    padding: 10px;
+    font-size: 30pt;
+}
+
+fieldset, legend, td.font-fat{
+    padding: 10px;
+    
+}

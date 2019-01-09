@@ -1,4 +1,5 @@
 <?php 
+
     $page = $_GET['page'] ?? 'home';
 
     // pages-Whitelist
@@ -12,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <title>The Jump And Run Extrem</title>
-    <link rel="stylesheet" href="styles/css/styles.css">
+    <link rel="stylesheet" href="../../res/images/image.png">
     <script type="module" src="styles/libaries/main.js"></script>
 </head>
 <body>

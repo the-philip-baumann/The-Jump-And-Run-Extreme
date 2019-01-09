@@ -1,0 +1,77 @@
+.wrapper {
+    margin-top: 2em;
+    width: 80%;
+    max-width: 550px;
+    margin: 2em auto 0;
+}
+
+body{
+    background-image: url('../../../res/images/scoreboard.png');
+    background-size: cover;
+    box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.836);
+    background-repeat: no-repeat;
+}
+
+#main-box {
+    margin-top: 0px;
+}
+
+.error-box {
+    color: red;
+    background-color: rgb(250, 220, 220);
+    border: 1px solid red;
+    border-radius: 10px;
+    padding-top: 10px;
+}
+
+
+.form-control {
+    margin-bottom: 20px;
+}
+
+.list{
+    list-style: none;
+    margin-left: 5px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+  
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.font-fat{
+    font-size: 20pt;
+    font-family: helvetica, sans-serif;
+}
+
+tr:nth-child(even)
+{
+    background-color: #f2f2f2;
+}
+
+fieldset, legend, td, th.user_score_title {
+    padding: 10px;
+    font-size: 30pt;
+}
+
+fieldset, legend, td.font-fat{
+    padding: 10px;
+    
+}
+
+.size{
+    font-size: 16pt;
+}
+
+.next-level{
+
+    margin-left: 40%;
+    margin-top: 275px;
+}

@@ -425,7 +425,7 @@ loop = function(timestamp) {
 
     if(player.x > 80 && player.x < 490 && player.y > 700
       ){
-        player.jumping = true;
+        player.jumping = true
     }
 
 

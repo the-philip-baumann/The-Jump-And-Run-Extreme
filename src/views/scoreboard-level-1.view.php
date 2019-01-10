@@ -44,8 +44,8 @@
                 <?php endif; ?>
     </div>
 
-        <div>
-            <a class="btn next-level size" href="Jump-And-Run-level-2.view.php">Bereit dein können auf die Probe zu stellen ?</a>
+        <div class="next-level">
+            <a href="Jump-And-Run-level-2.view.php">Bereit dein können auf die Probe zu stellen ?</a>
         </div>
 
 </body>

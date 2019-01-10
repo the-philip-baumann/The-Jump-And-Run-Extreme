@@ -31,8 +31,18 @@
                 
             ?>
             </table>
+            </fieldset>
+
+
             <form action="jump-and-run-level-1.view.php">
                 <input class="btn btn-primary" type="submit" value="Zurück zum Spiel" name="eintragen" id="eintragen">
             </form>
+
+            <div class="next-level">
+                <a href="Jump-And-Run-level-2.view.php">Bereit dein können auf die Probe zu stellen ?</a>
+            </div>
+
+            
+
     </div>
 </body>

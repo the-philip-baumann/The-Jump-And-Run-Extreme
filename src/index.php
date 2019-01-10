@@ -5,7 +5,7 @@
     // pages-Whitelist
     $pages = [
         'home',
-        'Jump-And-Run'
+        'Jump-And-Run-level-1'
     ];
 ?>
 <!DOCTYPE html>

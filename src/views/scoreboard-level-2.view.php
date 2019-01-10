@@ -41,4 +41,8 @@
                 ?>
                 <?php endif; ?>
     </div>
+    
+    <div class="next-level">
+            <a href="Jump-And-Run-level-1.view.php">Zu schwierig, dann versuche es zuerst hier.</a>
+        </div>
 </body>
